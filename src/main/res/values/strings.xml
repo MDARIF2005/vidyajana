@@ -50,14 +50,15 @@ If you have any questions or suggestions about my Terms and Conditions, do not h
         <item>Uttarakhand</item>
         <item>Uttar Pradesh </item>
         <item>West Bengal</item>
-
     </string-array>
+
     <string-array name="gender">
         <item>Male</item>
         <item>Female</item>
         <item>Others</item>
-
     </string-array>
+
+
     <string name="title_activity_homepage">homepage</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -69,4 +70,8 @@ If you have any questions or suggestions about my Terms and Conditions, do not h
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+
+    <string name="email"> </string>
+    <string name="password"> </string>
+    <string name="user_name"> </string>
 </resources>

@@ -5,7 +5,9 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.GrammaticalInflectionManagerCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
@@ -13,9 +15,11 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.text.style.ClickableSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -42,18 +46,17 @@ import java.util.Map;
 public class Register extends AppCompatActivity {
 
 
-    public static  final  String TAG="TAG";
-    TextView textView,textView2,textView3;
-    EditText editText,editText2,editText3,editText4;
+    public static final String TAG = "TAG";
+    TextView textView;
+    EditText editText, editText2, editText3, editText4;
 
-    Spinner spinner_gender,spinner_state;
+    Spinner spinner_gender, spinner_state;
 
     Button button;
     ProgressBar progressBar;
     FirebaseFirestore fstore;
     String userID;
     FirebaseAuth fAuth;
-
 
 
     @SuppressLint({"MissingInflatedId", "WrongViewCast"})
@@ -63,38 +66,100 @@ public class Register extends AppCompatActivity {
         setContentView(R.layout.activity_register);
         textView = findViewById(R.id.textView5);
         editText = findViewById(R.id.user_name);
-        editText2 = findViewById(R.id.email);
-        editText3 = findViewById(R.id.Password);
+        editText2 = findViewById(R.id.email2);
+        editText3 = findViewById(R.id.Password2);
         editText4 = findViewById(R.id.Birth_date);
-        textView2 = findViewById(R.id.Gender);
         spinner_gender = findViewById(R.id.gender);
-        textView3 = findViewById(R.id.indian_states);
         spinner_state = findViewById(R.id.spinner_states);
         button = findViewById(R.id.sign_up);
-        progressBar=findViewById(R.id.ProgressBar);
+        progressBar = findViewById(R.id.ProgressBar);
 
         fAuth = FirebaseAuth.getInstance();
         fstore = FirebaseFirestore.getInstance();
-         if(fAuth.getCurrentUser()!=null){
-             startActivity(new Intent(getApplicationContext(), course.class));
-             finish();
-         }
+        if (fAuth.getCurrentUser() != null) {
+            startActivity(new Intent(getApplicationContext(), course.class));
+            finish();
+        }
+
+
+        spinner_gender.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String item = parent.getItemAtPosition(position).toString();
+                Toast.makeText(Register.this, "selected item:" + item, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        ArrayList<String> arrayList = new ArrayList<>();
+        arrayList.add("Gender");
+        arrayList.add("male");
+        arrayList.add("female");
+        arrayList.add("other");
+        ArrayAdapter<String> adapter =
+                new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, arrayList);
+        adapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
+        spinner_gender.setAdapter(adapter);
+
+        spinner_state.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String item = parent.getItemAtPosition(position).toString();
+                Toast.makeText(Register.this, "selected item:" + item, Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        ArrayList<String> arrayList2 = new ArrayList<>();
+        arrayList2.add("states");
+        arrayList2.add("Andra Pradesh");
+        arrayList2.add("Arunachal Pradesh");
+        arrayList2.add("Assam");
+        arrayList2.add("Bihar");
+        arrayList2.add("Chhattisgarh");
+        arrayList2.add("Goa");
+        arrayList2.add("Gujarat");
+        arrayList2.add("Haryana");
+        arrayList2.add("Himachal Pradesh");
+        arrayList2.add("Jammu and Kashmir");
+        arrayList2.add("Jharkhand");
+        arrayList2.add("Karnataka");
+        arrayList2.add("Kerala");
+        arrayList2.add("Madhya Pradesh");
+        arrayList2.add("Maharashtra");
+        arrayList2.add("Manipur");
+        arrayList2.add("Meghalaya");
+        arrayList2.add("Mizoram");
+        arrayList2.add("Nagaland");
+        arrayList2.add("Orissa");
+        arrayList2.add("Punjab");
+        arrayList2.add("Rajasthan");
+        arrayList2.add("Sikkim");
+        arrayList2.add("Tamil Nadu");
+        arrayList2.add("Telangana");
+        arrayList2.add("Tripura");
+        arrayList2.add("Uttar Pradesh");
+        arrayList2.add("Uttarakhand");
+        arrayList2.add("West Bengal");
+
+
+
+        ArrayAdapter<String> adapter2 =
+                new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, arrayList2);
+        adapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
+        spinner_state.setAdapter(adapter2);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(Register.this,
-                        android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.states));
-
-                myAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
-                spinner_state.setAdapter(myAdapter);
-
-
-                ArrayAdapter<String> myAdapter2 = new ArrayAdapter<String>(Register.this,
-                        android.R.layout.simple_list_item_2, getResources().getStringArray(R.array.gender));
-                myAdapter2.setDropDownViewResource(android.R.layout.simple_list_item_2);
-                spinner_gender.setAdapter(myAdapter2);
 
 
                 final String email = editText2.getText().toString().trim();
@@ -102,8 +167,7 @@ public class Register extends AppCompatActivity {
                 String password = editText3.getText().toString().trim();
                 final String user_name = editText.getText().toString();
                 final String date_of_birth = editText4.getText().toString();
-                String gender = textView2.getTag().toString();
-                String state = textView3.getTag().toString();
+
                 if (TextUtils.isEmpty(email)) {
                     editText2.setError("Email is Required");
                 }
@@ -120,12 +184,9 @@ public class Register extends AppCompatActivity {
                 if (TextUtils.isEmpty(date_of_birth)) {
                     editText4.setError("Date is Required");
                 }
-                if (TextUtils.isEmpty(gender)) {
-                    textView2.setError("Gender is require");
-                }
-                if (TextUtils.isEmpty(state)) {
-                    textView3.setError("State is Required");
-                }
+
+
+
                 progressBar.setVisibility(View.VISIBLE);
 
                 fAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -150,8 +211,8 @@ public class Register extends AppCompatActivity {
                             userID = fAuth.getCurrentUser().getUid();
                             DocumentReference documentReference = fstore.collection("user").document(userID);
                             Map<String, Object> user = new HashMap<>();
-                            user.put("fname", textView);
-                            user.put("email", textView2);
+                            user.put("fname", editText);
+                            user.put("email", editText2);
                             documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void unused) {
@@ -168,19 +229,18 @@ public class Register extends AppCompatActivity {
 
                         } else {
                             Toast.makeText(Register.this, "Error" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                               progressBar.setVisibility(View.GONE);
+                            progressBar.setVisibility(View.GONE);
+
                         }
-
                     }
+
                 });
-
-
             }
+
+
+
         });
-
-
-
-
-
     }
+
+
 }

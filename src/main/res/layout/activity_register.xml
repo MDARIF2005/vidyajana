@@ -47,7 +47,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
         <EditText
-            android:id="@+id/email"
+            android:id="@+id/email2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
@@ -62,7 +62,7 @@
             app:layout_constraintTop_toBottomOf="@+id/user_name" />
 
         <EditText
-            android:id="@+id/Password"
+            android:id="@+id/Password2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
@@ -76,7 +76,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/email" />
+            app:layout_constraintTop_toBottomOf="@+id/email2" />
 
 
         <EditText
@@ -91,38 +91,18 @@
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Gender"
-            tools:ignore="MissingConstraints" />
-
-        <TextView
-            android:id="@+id/indian_states"
-            android:layout_width="285dp"
-            android:layout_height="68dp"
-            android:layout_margin="20dp"
-            android:layout_marginTop="60dp"
-            android:gravity="center"
-            android:hint="state"
-            android:visibility="visible"
-            android:inputType="text"
-            android:text="@+id/spinner_states"
-            android:textColor="@color/black"
-            android:textSize="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Birth_date"
+            app:layout_constraintTop_toBottomOf="@+id/gender"
             tools:ignore="MissingConstraints" />
 
         <Spinner
             android:id="@+id/spinner_states"
-            android:layout_width="71dp"
-            android:layout_height="66dp"
+            android:layout_width="368dp"
+            android:layout_height="62dp"
             android:layout_margin="20dp"
-            android:layout_marginTop="28dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginTop="36dp"
+            android:layout_marginEnd="24dp"
+            android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.84"
-            app:layout_constraintStart_toEndOf="@+id/indian_states"
             app:layout_constraintTop_toBottomOf="@+id/Birth_date" />
 
         <Button
@@ -139,33 +119,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/spinner_states" />
 
-        <TextView
-            android:id="@+id/Gender"
-            android:layout_width="257dp"
-            android:layout_height="57dp"
-            android:layout_margin="20dp"
-            android:layout_marginTop="20dp"
-            android:text="@+id/gender"
-            android:visibility="visible"
-            android:gravity="center"
-            android:hint="Gender"
-            android:textSize="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.129"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Password" />
-
         <Spinner
             android:id="@+id/gender"
-            android:layout_width="62dp"
+            android:layout_width="365dp"
             android:layout_height="55dp"
             android:layout_margin="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="16dp"
+            android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.658"
-            app:layout_constraintStart_toEndOf="@+id/Gender"
-            app:layout_constraintTop_toBottomOf="@+id/Password"
-            />
+            app:layout_constraintHorizontal_bias="0.924"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/Password2" />
 
         <ProgressBar
             android:layout_width="wrap_content"
